@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Miejska Biblioteka Publiczna | Twoje miejsce inspiracji</title>
+    <meta name="description" content="Oficjalna strona internetowa Miejskiej Biblioteki Publicznej. Sprawdź nowości, godziny otwarcia i skontaktuj się z nami.">
+    
+    <!-- Proste zaciągnięcie ładnej czcionki z Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+
+    <style>
+        /* --- ZMIENNE CSS (Kolorystyka) --- */
+        :root {
+            --primary-color: #2c3e50; /* Ciemny granat */
+            --secondary-color: #d35400; /* Ciepły pomarańcz/cegła */
+            --bg-color: #f9fbfd;
+            --text-color: #333333;
+            --white: #ffffff;
+            --focus-color: #2980b9;
+        }
+
+        /* --- RESET I PODSTAWY --- */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth; /* Płynne przewijanie do sekcji */
+        }
+
+        body {
+            font-family: 'Open Sans', sans-serif;
+            color: var(--text-color);
+            background-color: var(--bg-color);
+            line-height: 1.6;
+        }
+
+        h1, h2, h3, .logo {
+            font-family: 'Merriweather', serif;
+            color: var(--primary-color);
+        }
+
+        /* --- DOSTĘPNOŚĆ (A11y) --- */
+        a:focus-visible, button:focus-visible {
+            outline: 3px solid var(--focus-color);
+            outline-offset: 3px;
+        }
+
+        .skip-link {
+            position: absolute;
+            top: -40px;
+            left: 0;
+            background: var(--primary-color);
+            color: white;
+            padding: 8px;
+            z-index: 1000;
+            text-decoration: none;
+            transition: top 0.2s;
+        }
+
+        .skip-link:focus {
+            top: 0;
+        }
+
+        /* --- NAWIGACJA --- */
+        header {
+            background-color: var(--white);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo a {
+            font-size: 1.5rem;
+            font-weight: 700;
+            text-decoration: none;
+            color: var(--primary-color);
+        }
+
+        .main-nav ul {
+            list-style: none;
+            display: flex;
+            gap: 2rem;
+        }
+
+        .main-nav a {
+            text-decoration: none;
+            color: var(--primary-color);
+            font-weight: 600;
+            transition: color 0.3s;
+        }
+
+        .main-nav a:hover {
+            color: var(--secondary-color);
+        }
+
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--primary-color);
+        }
+
+        /* --- SEKCJA GŁÓWNA (Hero) --- */
+        .hero {
+            background: linear-gradient(rgba(44, 62, 80, 0.8), rgba(44, 62, 80, 0.8)), url('https://images.unsplash.com/photo-1507842217343-583bb7270b66?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80') center/cover;
+            color: var(--white);
+            text-align: center;
+            padding: 6rem 1rem;
+        }
+
+        .hero h1 {
+            color: var(--white);
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            max-width: 600px;
+            margin: 0 auto 2rem;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: var(--secondary-color);
+            color: var(--white);
+            padding: 0.8rem 2rem;
+            text-decoration: none;
+            font-weight: 600;
+            border-radius: 4px;
+            transition: background 0.3s, transform 0.2s;
+        }
+
+        .btn:hover {
+            background-color: #b94a00;
+            transform: translateY(-2px);
+        }
+
+        /* --- WSPÓLNE DLA SEKCJI --- */
+        section {
+            padding: 4rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 3px;
+            background: var(--secondary-color);
+            margin: 10px auto 0;
+        }
+
+        /* --- AKTUALNOŚCI --- */
+        .news-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .news-card {
+            background: var(--white);
+            border-radius: 8px;
+            padding: 2rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            border-top: 4px solid var(--secondary-color);
+            transition: transform 0.3s;
+        }
+
+        .news-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .news-date {
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        .news-card h3 {
+            margin-bottom: 1rem;
+        }
+
+        /* --- O NAS I GODZINY (Grid) --- */
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .hours-list {
+            list-style: none;
+            background: var(--white);
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+
+        .hours-list li {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.8rem 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .hours-list li:last-child {
+            border-bottom: none;
+        }
+
+        /* --- STOPKA / KONTAKT --- */
+        footer {
+            background-color: var(--primary-color);
+            color: var(--white);
+            padding: 3rem 2rem 1rem;
+            margin-top: 4rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-content h2 {
+            color: var(--white);
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-content address {
+            font-style: normal;
+            line-height: 2;
+        }
+
+        .footer-content a {
+            color: #bdc3c7;
+            text-decoration: none;
+        }
+        
+        .footer-content a:hover, .footer-content a:focus {
+            color: var(--white);
+            text-decoration: underline;
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            font-size: 0.9rem;
+            color: #bdc3c7;
+        }
+
+        /* --- RESPONSYWNOŚĆ (Mobile) --- */
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: block;
+            }
+
+            .main-nav {
+                display: none;
+                width: 100%;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                background: var(--white);
+                box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            }
+
+            .main-nav.active {
+                display: block;
+            }
+
+            .main-nav ul {
+                flex-direction: column;
+                gap: 0;
+            }
+
+            .main-nav a {
+                display: block;
+                padding: 1rem 2rem;
+                border-bottom: 1px solid #eee;
+            }
+
+            .about-grid, .footer-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Nawigacja dla czytników ekranu i klawiatury -->
+    <a href="#main-content" class="skip-link">Przejdź do głównej treści</a>
+
+    <header>
+        <div class="nav-container">
+            <div class="logo">
+                <a href="#" aria-label="Strona główna biblioteki">📚 Biblioteka</a>
+            </div>
+            
+            <button class="menu-toggle" aria-controls="primary-navigation" aria-expanded="false" aria-label="Otwórz menu">
+                ☰
+            </button>
+
+            <nav class="main-nav" id="primary-navigation">
+                <ul>
+                    <li><a href="#aktualnosci">Aktualności</a></li>
+                    <li><a href="#o-nas">O nas</a></li>
+                    <li><a href="#katalog">Katalog online</a></li>
+                    <li><a href="#kontakt">Kontakt</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main id="main-content">
+        <section class="hero">
+            <h1>Odkryj świat pełen historii</h1>
+            <p>Zanurz się w naszej bogatej kolekcji książek, audiobooków i czasopism. Miejsce spotkań, nauki i wyobraźni.</p>
+            <a href="#aktualnosci" class="btn">Sprawdź co nowego</a>
+        </section>
+
+        <section id="aktualnosci">
+            <h2 class="section-title">Aktualności</h2>
+            <div class="news-grid">
+                
+                <article class="news-card" tabindex="0">
+                    <time class="news-date" datetime="2023-11-20">20 Listopada 2023</time>
+                    <h3>Spotkanie z autorem kryminałów</h3>
+                    <p>Zapraszamy na wyjątkowe spotkanie autorskie z Janem Kowalskim. Porozmawiamy o jego najnowszej powieści. Wstęp wolny!</p>
+                </article>
+
+                <article class="news-card" tabindex="0">
+                    <time class="news-date" datetime="2023-11-15">15 Listopada 2023</time>
+                    <h3>Nowości w dziale dziecięcym</h3>
+                    <p>Na nasze półki trafiło ponad 50 nowych tytułów dla najmłodszych czytelników. Zapraszamy po piękne baśnie i komiksy.</p>
+                </article>
+
+                <article class="news-card" tabindex="0">
+                    <time class="news-date" datetime="2023-11-10">10 Listopada 2023</time>
+                    <h3>Warsztaty komputerowe dla seniorów</h3>
+                    <p>Ruszają zapisy na darmowy kurs obsługi internetu dla osób 60+. Liczba miejsc w grupie jest ograniczona.</p>
+                </article>
+
+            </div>
+        </section>
+
+        <section id="o-nas">
+            <h2 class="section-title">O Bibliotece</h2>
+            <div class="about-grid">
+                <div class="about-text">
+                    <p>Jesteśmy nowoczesnym centrum kultury otwartym dla każdego. W naszych zbiorach znajdziesz tysiące tytułów, od klasyki po najnowsze bestsellery.</p>
+                    <br>
+                    <p><strong>Dostępność:</strong> Nasz budynek jest w pełni dostosowany do potrzeb osób z niepełnosprawnościami ruchowymi (podjazd, winda). Oferujemy również bogaty zbiór książek z dużym drukiem (wielkie litery) oraz audiobooków dla osób słabowidzących.</p>
+                </div>
+                
+                <div class="hours-list">
+                    <h3 style="margin-bottom: 1rem; color: var(--primary-color);">Godziny otwarcia</h3>
+                    <ul>
+                        <li><span>Poniedziałek - Środa</span> <span>10:00 - 18:00</span></li>
+                        <li><span>Czwartek - Piątek</span> <span>09:00 - 19:00</span></li>
+                        <li><span>Sobota</span> <span>09:00 - 14:00</span></li>
+                        <li><span>Niedziela</span> <span style="color: #e74c3c; font-weight: bold;">Nieczynne</span></li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer id="kontakt">
+        <div class="footer-content">
+            <div>
+                <h2>Kontakt</h2>
+                <address>
+                    <p>Miejska Biblioteka Publiczna</p>
+                    <p>ul. Czytelnicza 42, 00-123 Książkowice</p>
+                    <p>Telefon: <a href="tel:+48123456789" aria-label="Zadzwoń do nas">+48 123 456 789</a></p>
+                    <p>Email: <a href="mailto:kontakt@biblioteka.pl" aria-label="Napisz do nas maila">kontakt@biblioteka.pl</a></p>
+                </address>
+            </div>
+            <div>
+                <h2>Informacje dodatkowe</h2>
+                <p>Konto bankowe dla darowizn: 11 2222 3333 4444 5555 6666 7777</p>
+                <br>
+                <p>NIP: 123-456-78-90</p>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>&copy; 2023 Miejska Biblioteka Publiczna. Wszelkie prawa zastrzeżone.</p>
+        </div>
+    </footer>
+
+    <!-- Skrypt do obsługi menu mobilnego -->
+    <script>
+        const toggleBtn = document.querySelector('.menu-toggle');
+        const nav = document.querySelector('.main-nav');
+        const navLinks = document.querySelectorAll('.main-nav a');
+
+        // Otwieranie/zamykanie menu mobilnego
+        toggleBtn.addEventListener('click', () => {
+            const isExpanded = toggleBtn.getAttribute('aria-expanded') === 'true';
+            toggleBtn.setAttribute('aria-expanded', !isExpanded);
+            nav.classList.toggle('active');
+            
+            // Zmiana ikonki
+            if(!isExpanded) {
+                toggleBtn.innerHTML = '✕'; // krzyżyk
+            } else {
+                toggleBtn.innerHTML = '☰'; // hamburger
+            }
+        });
+
+        // Zamknij menu mobilne po kliknięciu w link
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                nav.classList.remove('active');
+                toggleBtn.setAttribute('aria-expanded', 'false');
+                toggleBtn.innerHTML = '☰';
+            });
+        });
+    </script>
+</body>
+</html>
