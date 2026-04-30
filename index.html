@@ -93,6 +93,11 @@
         .hero-text p {
             font-size: 1.2rem; color: var(--text-gray); margin-bottom: 2rem;
         }
+        
+        /* PRZYCISKI W HERO */
+        .hero-actions {
+            display: flex; gap: 15px; flex-wrap: wrap;
+        }
         .btn-primary {
             display: inline-block; background: var(--secondary); color: var(--white);
             padding: 12px 28px; border-radius: 30px; text-decoration: none;
@@ -102,6 +107,16 @@
         .btn-primary:hover {
             transform: translateY(-3px); background: #e68a00;
         }
+        .btn-secondary {
+            display: inline-block; background: transparent; color: var(--primary);
+            padding: 10px 24px; border-radius: 30px; text-decoration: none;
+            font-weight: 700; font-family: 'Nunito', sans-serif; border: 2px solid var(--primary);
+            transition: var(--transition);
+        }
+        .btn-secondary:hover {
+            background: var(--primary); color: var(--white); transform: translateY(-3px);
+        }
+
         .hero-img {
             width: 100%; border-radius: var(--radius);
             box-shadow: var(--shadow); object-fit: cover;
@@ -175,22 +190,30 @@
         .info-box h3 { margin-bottom: 1rem; font-size: 1.4rem; color: var(--primary); }
         .info-box ul { list-style: none; }
         .info-box li {
-            display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #e0e0e0;
+            display: flex; justify-content: space-between; padding: 4px 0; border-bottom: 1px solid #e0e0e0;
+            font-size: 0.95rem;
         }
         .info-box li:last-child { border: none; }
-        .contact-details p { margin-bottom: 10px; font-size: 1.1rem; }
+        .contact-details p { margin-bottom: 10px; font-size: 1rem; }
         .contact-details a { color: var(--primary); font-weight: bold; text-decoration: none; }
 
         /* --- STOPKA --- */
         footer {
-            background: var(--primary); color: white; padding: 3rem 2rem 1rem;
+            background: var(--primary); color: white; padding: 4rem 2rem 1rem;
         }
         .footer-grid {
             max-width: 1200px; margin: 0 auto; display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; margin-bottom: 2rem;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 3rem; margin-bottom: 3rem;
         }
+        .footer-col h3 {
+            margin-bottom: 1.5rem; font-family: 'Nunito', sans-serif; font-size: 1.3rem;
+            color: var(--white); border-bottom: 2px solid rgba(255,255,255,0.2); padding-bottom: 10px;
+        }
+        .footer-col p { color: #d0e1f9; font-size: 0.95rem; margin-bottom: 10px; line-height: 1.5; }
+        .footer-col ul { list-style: none; color: #d0e1f9; font-size: 0.95rem; margin-bottom: 15px;}
+        .footer-col li { display: flex; justify-content: space-between; margin-bottom: 5px; }
         .footer-links a {
-            display: block; color: #d0e1f9; text-decoration: none; margin-bottom: 8px;
+            display: block; color: #d0e1f9; text-decoration: none; margin-bottom: 12px; font-size: 0.95rem;
         }
         .footer-links a:hover { color: var(--white); text-decoration: underline; }
         .footer-bottom {
@@ -212,6 +235,7 @@
         @media (max-width: 850px) {
             .hero { grid-template-columns: 1fr; text-align: center; margin: 2rem auto; }
             .hero-text h1 { font-size: 2.5rem; }
+            .hero-actions { justify-content: center; }
             .contact-grid { grid-template-columns: 1fr; }
             .mobile-btn { display: block; }
             .main-menu {
@@ -244,7 +268,7 @@
                 <li><a href="#o-nas">O nas</a></li>
                 <li><a href="#oferta">Nasza oferta</a></li>
                 <li><a href="#aktualnosci">Aktualności</a></li>
-                <li><a href="#kontakt">Kontakt i godziny</a></li>
+                <li><a href="#kontakt">Kontakt</a></li>
             </ul>
         </div>
     </header>
@@ -255,7 +279,13 @@
             <div class="hero-text">
                 <h1>Książki, które inspirują. Miejsce dla Ciebie.</h1>
                 <p>W naszej bibliotece w Świątnikach Górnych codziennie wspieramy rozwój czytelnictwa w atmosferze spokoju, uśmiechu i profesjonalnej pomocy. Odkryj z nami świat literatury!</p>
-                <a href="#katalog" class="btn-primary">Przejdź do katalogu online</a>
+                
+                <!-- Dodane przyciski -->
+                <div class="hero-actions">
+                    <a href="#katalog" class="btn-primary">Elektroniczny katalog</a>
+                    <a href="#bip" class="btn-secondary">BIP</a>
+                    <a href="#portal" class="btn-secondary">Portal ogólnopolski</a>
+                </div>
             </div>
             <!-- Zdjęcie zastępcze biblioteki -->
             <img src="https://images.unsplash.com/photo-1521587760476-6c12a4b040da?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="Wnętrze przyjaznej biblioteki z regałami pełnymi książek" class="hero-img">
@@ -298,7 +328,6 @@
                 </div>
                 
                 <div class="news-grid">
-                    <!-- Karta 1 -->
                     <article class="news-card">
                         <div class="news-img" style="background-image: url('https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80');" aria-hidden="true"></div>
                         <div class="news-content">
@@ -309,7 +338,6 @@
                         </div>
                     </article>
                     
-                    <!-- Karta 2 -->
                     <article class="news-card">
                         <div class="news-img" style="background-image: url('https://images.unsplash.com/photo-1577563908411-5077b6dc7624?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80');" aria-hidden="true"></div>
                         <div class="news-content">
@@ -320,7 +348,6 @@
                         </div>
                     </article>
 
-                    <!-- Karta 3 -->
                     <article class="news-card">
                         <div class="news-img" style="background-image: url('https://images.unsplash.com/photo-1503676260728-1c00da094a0b?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80');" aria-hidden="true"></div>
                         <div class="news-content">
@@ -334,7 +361,7 @@
             </div>
         </section>
 
-        <!-- Kontakt i Godziny Otwarcia -->
+        <!-- Kontakt i Godziny Otwarcia (Zaktualizowane) -->
         <section id="kontakt" class="contact-section">
             <div class="section-header">
                 <h2>Kontakt i godziny otwarcia</h2>
@@ -345,14 +372,23 @@
                 <!-- Lewa kolumna: Godziny -->
                 <div>
                     <div class="info-box">
-                        <h3>Godziny otwarcia</h3>
+                        <h3>Godziny otwarcia - Świątniki Górne</h3>
                         <ul>
-                            <li><span>Poniedziałek</span> <span>08:00 – 16:00</span></li>
-                            <li><span>Wtorek</span> <span>09:00 – 17:00</span></li>
-                            <li><span>Środa</span> <span>09:00 – 17:00</span></li>
-                            <li><span>Czwartek</span> <span>09:00 – 17:00</span></li>
-                            <li><span>Piątek</span> <span>09:00 – 15:00</span></li>
-                            <li><span>Sobota – Niedziela</span> <span style="color: #d32f2f; font-weight: bold;">Nieczynne</span></li>
+                            <li><span>poniedziałek</span> <span>7.30 - 15.00</span></li>
+                            <li><span>wtorek</span> <span>12.00 - 20.00</span></li>
+                            <li><span>środa</span> <span>8.00 - 17.00</span></li>
+                            <li><span>czwartek</span> <span>12.00 - 20.00</span></li>
+                            <li><span>piątek</span> <span>7.30 - 15.00</span></li>
+                        </ul>
+                    </div>
+                    <div class="info-box">
+                        <h3>Godziny otwarcia - Filia Rzeszotary</h3>
+                        <ul>
+                            <li><span>poniedziałek</span> <span>9.00 - 17.00</span></li>
+                            <li><span>wtorek</span> <span>10.30 - 18.30</span></li>
+                            <li><span>środa</span> <span>09.00 - 17.00</span></li>
+                            <li><span>czwartek</span> <span>10.30 - 18.30</span></li>
+                            <li><span>piątek</span> <span>09.00 - 17.00</span></li>
                         </ul>
                     </div>
                 </div>
@@ -360,42 +396,69 @@
                 <!-- Prawa kolumna: Kontakt -->
                 <div class="contact-details">
                     <div class="info-box">
-                        <h3>Nasz adres</h3>
+                        <h3>Siedziba Główna</h3>
                         <p><strong>Biblioteka Miejska w Świątnikach Górnych</strong></p>
-                        <p>ul. Kazimierza Bruchnalskiego 5</p>
-                        <p>32-040 Świątniki Górne</p>
+                        <p>ul. Bruchnalskiego 5,<br>32-040 Świątniki Górne</p>
+                        <p>📞 Telefon: <a href="tel:+48122220012">12 222 00 12</a></p>
+                        <p>✉️ E-mail: <a href="mailto:biblioteka@swiatniki-gorne.pl">biblioteka@swiatniki-gorne.pl</a></p>
                     </div>
                     
                     <div class="info-box" style="border-left-color: var(--secondary);">
-                        <h3>Skontaktuj się</h3>
-                        <p>📞 Telefon: <a href="tel:+48122220012">12 222 00 12</a></p>
-                        <p>✉️ E-mail: <a href="mailto:biblioteka@swiatniki-gorne.pl">biblioteka@swiatniki-gorne.pl</a></p>
-                        <p>🌐 NIP: 944-19-52-504</p>
+                        <h3>Filia</h3>
+                        <p><strong>Filia w Rzeszotarach</strong></p>
+                        <p>ul. Górny Rynek 4</p>
+                        <p>📞 Telefon: <a href="tel:+48122705066">12 270 50 66</a></p>
                     </div>
                 </div>
             </div>
         </section>
     </main>
 
-    <!-- Stopka a'la BIP/Urząd -->
+    <!-- Zaktualizowana Stopka -->
     <footer>
         <div class="footer-grid">
-            <div>
-                <h3 style="margin-bottom: 1rem; font-family: 'Nunito', sans-serif;">O Bibliotece</h3>
-                <p style="font-size: 0.9rem; color: #d0e1f9;">Jesteśmy samorządową instytucją kultury. Zapewniamy mieszkańcom gminy Świątniki Górne darmowy dostęp do wiedzy, kultury i informacji.</p>
+            <!-- Kolumna 1: Dane adresowe -->
+            <div class="footer-col">
+                <h3>Dane adresowe</h3>
+                <p><strong>Biblioteka Miejska<br>w Świątnikach Górnych</strong><br>
+                ul. Bruchnalskiego 5,<br>
+                32-040 Świątniki Górne<br>
+                Telefon: 12 222 00 12<br>
+                E-mail: biblioteka@swiatniki-gorne.pl</p>
+                
+                <p style="margin-top: 15px;"><strong>Filia w Rzeszotarach:</strong><br>
+                ul. Górny Rynek 4<br>
+                Telefon: 12 270 50 66</p>
             </div>
-            <div class="footer-links">
-                <h3 style="margin-bottom: 1rem; font-family: 'Nunito', sans-serif;">Na skróty</h3>
-                <a href="#katalog">Katalog SzukamKsiążki</a>
-                <a href="#">Regulamin Biblioteki</a>
-                <a href="#">Cennik usług (ksero/wydruki)</a>
-                <a href="#">Ochrona Danych Osobowych (RODO)</a>
+            
+            <!-- Kolumna 2: Godziny otwarcia -->
+            <div class="footer-col">
+                <h3>Godziny otwarcia</h3>
+                <p style="font-weight: bold; color: var(--white); margin-bottom: 5px;">Świątniki Górne</p>
+                <ul>
+                    <li><span>poniedziałek</span> <span>7.30 - 15.00</span></li>
+                    <li><span>wtorek</span> <span>12.00 - 20.00</span></li>
+                    <li><span>środa</span> <span>8.00 - 17.00</span></li>
+                    <li><span>czwartek</span> <span>12.00 - 20.00</span></li>
+                    <li><span>piątek</span> <span>7.30 - 15.00</span></li>
+                </ul>
+                
+                <p style="font-weight: bold; color: var(--white); margin-bottom: 5px; margin-top: 15px;">Rzeszotary</p>
+                <ul>
+                    <li><span>poniedziałek</span> <span>9.00 - 17.00</span></li>
+                    <li><span>wtorek</span> <span>10.30 - 18.30</span></li>
+                    <li><span>środa</span> <span>09.00 - 17.00</span></li>
+                    <li><span>czwartek</span> <span>10.30 - 18.30</span></li>
+                    <li><span>piątek</span> <span>09.00 - 17.00</span></li>
+                </ul>
             </div>
-            <div class="footer-links">
-                <h3 style="margin-bottom: 1rem; font-family: 'Nunito', sans-serif;">Ważne linki</h3>
-                <a href="#">BIP - Biuletyn Informacji Publicznej</a>
-                <a href="#">Deklaracja Dostępności</a>
-                <a href="#">Urząd Miasta i Gminy Świątniki Górne</a>
+            
+            <!-- Kolumna 3: Informacje prawne -->
+            <div class="footer-col footer-links">
+                <h3>Informacje prawne</h3>
+                <a href="#">RODO</a>
+                <a href="#">Oświadczenie o dostępności</a>
+                <a href="#">Standardy Ochrony Małoletnich</a>
             </div>
         </div>
         <div class="footer-bottom">
@@ -404,7 +467,7 @@
         </div>
     </footer>
 
-    <!-- Widget dostępności (Wizualny symbol często używany na stronach gminnych) -->
+    <!-- Widget dostępności -->
     <div class="a11y-widget" aria-label="Narzędzia dostępności" tabindex="0" title="Dostosuj stronę">
         ♿
     </div>
